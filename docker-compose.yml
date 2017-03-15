@@ -46,6 +46,8 @@ services:
   teamcity_agent1:
     image: jetbrains/teamcity-minimal-agent
     container_name: tc_agent1
+    environment:
+     - SERVER_URL=teamcity:8111
     volumes:
      - /home/niels/docker_volumes/tc/agent1:/data/teamcity_agent/conf
     depends_on: 
