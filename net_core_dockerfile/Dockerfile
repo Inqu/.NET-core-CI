@@ -1,11 +1,8 @@
 FROM jetbrains/teamcity-minimal-agent:10.0.5
 
-# Installing somepackages (https npm and some bower and gulp for npm)
+# Installing https package
 RUN apt-get update && \
-    apt-get install apt-transport-https -y && \
-    apt-get install npm -y && \
-    npm install npm -g && \
-    npm install bower gulp -g
+    apt-get install apt-transport-https -y
 
 # Installing .NET core SDK
 RUN sh -c 'echo "deb [arch=amd64] https://apt-mo.trafficmanager.net/repos/dotnet-release/ yakkety main" > /etc/apt/sources.list.d/dotnetdev.list' && \
