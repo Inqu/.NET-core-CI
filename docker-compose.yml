@@ -48,5 +48,6 @@ services:
     container_name: tc_agent1
     volumes:
      - /home/niels/docker_volumes/tc/agent1:/data/teamcity_agent/conf
-    depends_on: teamcity
+    depends_on: 
+     - teamcity
     restart: always
