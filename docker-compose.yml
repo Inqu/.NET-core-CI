@@ -44,7 +44,7 @@ services:
     restart: always
 
   teamcity_agent1:
-    image: jetbrains/teamcity-minimal-agent
+    image: jetbrains/teamcity-minimal-agent:10.0.5
     container_name: tc_agent1
     environment:
      - SERVER_URL=teamcity:8111
