@@ -1,2 +1,0 @@
-CREATE DATABASE teamcity
-GRANT ALL PRIVILEGES ON DATABASE teamcity TO niels/docker-entrypoint-initdb.d/
