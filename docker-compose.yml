@@ -1,0 +1,44 @@
+version: '3'
+
+services: 
+  gogs:
+    # Using latest because of bug in 0.10.8
+    image: gogs/gogs:latest
+    container_name: gogs
+    ports: 
+     - "3000:3000"
+     - "10022:22"
+    volumes: 
+    # Change vol to preferred
+     - /home/niels/docker_volumes/gogs_data:/data
+    depends_on:
+     - mysql_db
+    restart: always
+
+  mysql_db:
+    # Problems with mysql 8
+    image: mysql:5.7.17
+    container_name: mysql
+    ports:
+     - "3306:3306"
+    env_file: mysql.env
+    volumes: 
+    # Change to preferred
+     - /home/niels/docker_volumes/mysql:/var/lib/mysql
+     - ./scripts:/docker-entrypoint-initdb.d
+    restart: always
+    # Needed for gogs (defaults)
+    command: [mysqld, --character-set-server=utf8mb4, --collation-server=utf8mb4_unicode_ci, --default-storage-engine=InnoDB]
+
+  teamcity:
+    image: jetbrains/teamcity-server:10.0.5
+    container_name: teamcity
+    ports:
+     - "8111:8111"
+    volumes:
+     - /home/niels/docker_volumes/tc/tc_data:/data/teamcity_server/datadir
+     - ./jdbc:/data/teamcity_server/datadir/lib/jdbc
+     - /home/niels/docker_volumes/tc/tc_log:/opt/teamcity/logs
+    depends_on:
+     - mysql_db
+    restart: always
