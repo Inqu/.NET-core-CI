@@ -37,8 +37,9 @@ services:
      - "8111:8111"
     volumes:
      - /home/niels/docker_volumes/tc/tc_data:/data/teamcity_server/datadir
-     - ./jdbc:/data/teamcity_server/datadir/lib/jdbc
      - /home/niels/docker_volumes/tc/tc_log:/opt/teamcity/logs
+     - ./jdbc:/data/teamcity_server/datadir/lib/jdbc
+     - ./tc_plugins:/data/teamcity_server/datadir/plugins
     depends_on:
      - mysql_db
     restart: always
